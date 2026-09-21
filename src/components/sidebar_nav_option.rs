@@ -41,7 +41,7 @@ pub fn SideBarNavOption(
 
     view! {
         <div class=derived_class>
-            <ReactiveLabelledIcon 
+            <ReactiveLabelledIcon
                 label=label
                 icon_src=Signal::derive(derived_icon_src)
                 class="labelled-icon-gap-12".to_string()
@@ -49,6 +49,5 @@ pub fn SideBarNavOption(
                 icon_class="icon-20".to_string()
             />
         </div>
-        
     }
 }

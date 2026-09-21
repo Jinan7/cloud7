@@ -3,9 +3,9 @@ use leptos::prelude::*;
 #[component]
 pub fn NotFound() -> impl IntoView {
 
-    view! { 
+    view! {
         <div>
             <p>"Not Found"</p>
-        </div> 
+        </div>
     }
 }

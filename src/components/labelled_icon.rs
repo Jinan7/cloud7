@@ -12,10 +12,9 @@ pub fn ReactiveLabelledIcon(
 
     view! {
         <div class=class>
-            <img class=icon_class src=icon_src/>
+            <img class=icon_class src=icon_src />
             <p class=label_class>{label}</p>
         </div>
-
     }
 }
 
@@ -31,9 +30,8 @@ pub fn LabelledIcon(
 
     view! {
         <div class=class>
-            <img class=icon_class src=icon_src/>
+            <img class=icon_class src=icon_src />
             <p class=label_class>{label}</p>
         </div>
-
     }
 }

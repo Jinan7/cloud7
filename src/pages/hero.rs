@@ -6,13 +6,13 @@ use crate::components::{NavBar, SideBar};
 #[component]
 pub fn Hero() -> impl IntoView {
     
-    view! { 
+    view! {
         <div class="hero">
-            <SideBar/>
+            <SideBar />
             <div class="hero-content">
-                <NavBar/>
-                <Outlet/>
+                <NavBar />
+                <Outlet />
             </div>
-        </div> 
+        </div>
     }
 }
