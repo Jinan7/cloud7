@@ -8,6 +8,6 @@ mod sidebar_nav;
 pub use navbar::NavBar;
 pub use upload_button::UploadButton;
 pub use labelled_icon::{LabelledIcon, ReactiveLabelledIcon};
-pub use sidebar_nav_option::{SideBarNavOption, SideBarNavOptionState};
+pub use sidebar_nav_option::SideBarNavOption;
 pub use sidebar::SideBar;
-pub use sidebar_nav::SideBarNav;
+pub use sidebar_nav::{SideBarNav, SelectedSideBarNavOption};
