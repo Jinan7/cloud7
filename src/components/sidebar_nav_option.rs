@@ -40,6 +40,15 @@ pub fn SideBarNavOption(
     };
 
     let value = label.clone();
+    let derived_icon_class = move || {
+        if selected_side_bar_nav_option.get().0 == value {
+            "icon-20-blue".to_string()
+        } else {
+            "icon-20-grey".to_string()
+        }
+    };
+
+    let value = label.clone();
     view! {
         <div class=derived_class
             on:click = move |_| { set_selected_side_bar_nav_option.set(SelectedSideBarNavOption(value.clone()));}
@@ -49,7 +58,7 @@ pub fn SideBarNavOption(
                 icon_src=Signal::derive(derived_icon_src)
                 class="labelled-icon-gap-12".to_string()
                 label_class=Signal::derive(derived_label_class)
-                icon_class="icon-20".to_string()
+                icon_class=Signal::derive(derived_icon_class)
             />
         </div>
     }

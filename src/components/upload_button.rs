@@ -1,10 +1,11 @@
+use icons::Upload;
 use leptos::prelude::*;
 
 #[component]
 pub fn UploadButton() -> impl IntoView {
     view! {
         <div class="upload-button">
-            <img class="icon-20" src="./public/upload.png" />
+            <Upload class="icon-20-white"/>
             <p class="inter-normal-white">"Upload file"</p>
         </div>
     }

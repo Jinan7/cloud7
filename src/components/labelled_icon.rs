@@ -1,19 +1,33 @@
 use leptos::prelude::*;
-
+use icons::{House, LayoutGrid, Search, Bell};
 #[component]
 pub fn ReactiveLabelledIcon(
     label: String,
     icon_src: Signal<String>,
     class: String,
     label_class: Signal<String>,
-    icon_class: String,
+    icon_class: Signal<String>,
 
 ) -> impl IntoView {
 
+    let value = label.clone();
     view! {
         <div class=class>
-            <img class=icon_class src=icon_src />
-            <p class=label_class>{label}</p>
+            { 
+                move || {
+
+                    match label.as_str() {
+                        "Home" => view! { <House class=icon_class.get()/> }.into_any(),
+                        "Workspaces" => view! { <LayoutGrid class=icon_class.get()/> }.into_any(),
+                        "Search" => view! { <Search class=icon_class.get()/> }.into_any(),
+                        "Notifications" => view! { <Bell class=icon_class.get()/> }.into_any(),
+                        _ => view! {
+                            <img class=icon_class src=icon_src />
+                        }.into_any()
+                    } 
+                }      
+            }
+            <p class=label_class>{value}</p>
         </div>
     }
 }
@@ -30,7 +44,17 @@ pub fn LabelledIcon(
 
     view! {
         <div class=class>
-            <img class=icon_class src=icon_src />
+            {
+                match label.as_str() {
+                    "Home" => view! { <House class=icon_class/> }.into_any(),
+                    "Workspaces" => view! { <LayoutGrid class=icon_class/> }.into_any(),
+                    "Search" => view! { <Search class=icon_class/> }.into_any(),
+                    "Notifications" => view! { <Bell class=icon_class/> }.into_any(),
+                    _ => view! {
+                        <img class=icon_class src=icon_src />
+                    }.into_any()
+                }    
+            }
             <p class=label_class>{label}</p>
         </div>
     }

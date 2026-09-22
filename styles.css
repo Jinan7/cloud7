@@ -3,6 +3,7 @@
 :root {
     --blue: #497fff;
     --blue-transparent-10: rgba(73, 127, 255, 0.1);
+    --grey: ##5b5b5b;
 }
 .inter-normal-black {
     font-family: "Inter", sans-serif;
@@ -40,9 +41,22 @@
     color: #ffffff;
 }
 
-.icon-20 {
+.icon-20-grey {
     width: 20px;
     height: 20px;
+    color: var(--grey);
+}
+
+.icon-20-blue {
+    width: 20px;
+    height: 20px;
+    color: var(--blue);
+}
+
+.icon-20-white {
+    width: 20px;
+    height: 20px;
+    color: #ffffff;
 }
 
 * {
