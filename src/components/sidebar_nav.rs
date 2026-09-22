@@ -1,5 +1,5 @@
 use leptos::prelude::*;
-use crate::components::{SideBarNavOption};
+use crate::components::{SideBarNavOption, labelled_icon::IconLabels};
 
 #[derive(Clone)]
 struct SideBarNavOptionPayload {
@@ -20,22 +20,22 @@ pub fn SideBarNav() -> impl IntoView {
     let (sidebar_nav_options, _set_sidebar_nav_options) = signal(vec! [
         SideBarNavOptionPayload {
             key: "Home".to_string(),
-            label: "Home".to_string(),
+            label: IconLabels::HOME.to_owned(),
             icon_name: "home".to_string(),
         },
         SideBarNavOptionPayload {
             key: "Workspaces".to_string(),
-            label: "Workspaces".to_string(),
+            label: IconLabels::WORKSPACES.to_owned(),
             icon_name: "workspaces".to_string(),
         },
         SideBarNavOptionPayload {
             key: "Search".to_string(),
-            label: "Search".to_string(),
+            label: IconLabels::SEARCH.to_owned(),
             icon_name: "search".to_string(),
         },
         SideBarNavOptionPayload {
             key: "Notifications".to_string(),
-            label: "Notifications".to_string(),
+            label: IconLabels::NOTIFICATIONS.to_owned(),
             icon_name: "notifications".to_string(),
         },
     ]);

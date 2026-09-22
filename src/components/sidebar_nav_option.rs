@@ -3,6 +3,7 @@ use leptos::prelude::*;
 use crate::components::{ReactiveLabelledIcon, SelectedSideBarNavOption};
 
 
+
 #[component]
 pub fn SideBarNavOption(
     label: String,

@@ -3,7 +3,8 @@
 :root {
     --blue: #497fff;
     --blue-transparent-10: rgba(73, 127, 255, 0.1);
-    --grey: ##5b5b5b;
+    --grey: #5b5b5b;
+    --grey-2: #7c7c7c;
 }
 .inter-normal-black {
     font-family: "Inter", sans-serif;
@@ -29,7 +30,16 @@
     font-style: normal;
     font-size: 14px;
     font-weight: 542;
-    color: #5b5b5b;
+    color: var(--grey);
+}
+
+.inter-12-grey-2 {
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-size: 12px;
+    font-weight: 568;
+    color: var(--grey-2);
 }
 
 .inter-normal-white {
@@ -59,6 +69,20 @@
     color: #ffffff;
 }
 
+.icon-16-grey {
+    width: 16px;
+    height: 16px;
+    color: var(--grey-2);
+}
+
+.labelled-dropdown {
+    padding-left: 16px;
+    padding-right: 16px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -80,15 +104,22 @@ img {
 
 
 
-.sidebar {
+.sidebar {   
+    background: #f6f6f6; 
+}
+
+.sidebar-header {
     padding-top: 16px;
     padding-bottom: 16px;
     padding-left: 8px;
     padding-right: 8px;
-    background: #f6f6f6;
     display: flex;
     flex-direction: column;
     gap: 40px;
+}
+
+.sidebar-footer {
+
 }
 
 .sidebar-nav {
@@ -123,6 +154,10 @@ img {
 }
 
 .sidebar-workspaces {
+
+    display: flex;
+    flex-direction: column;
+    gap: 8;
 
 }
 
@@ -164,6 +199,12 @@ img {
     display: flex;
     align-items: center;
     gap: 12px;
+}
+
+.labelled-icon-gap-4 {
+    display: flex;
+    align-items: center;
+    gap: 4px;
 }
 
 .nav-upload-and-profile {

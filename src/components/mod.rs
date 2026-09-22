@@ -7,7 +7,7 @@ mod sidebar_nav;
 
 pub use navbar::NavBar;
 pub use upload_button::UploadButton;
-pub use labelled_icon::{LabelledIcon, ReactiveLabelledIcon};
+pub use labelled_icon::{LabelledIcon, ReactiveLabelledIcon, InvertedLabelledIcon};
 pub use sidebar_nav_option::SideBarNavOption;
 pub use sidebar::SideBar;
 pub use sidebar_nav::{SideBarNav, SelectedSideBarNavOption};
