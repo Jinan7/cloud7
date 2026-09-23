@@ -20,7 +20,8 @@ pub fn SideBarSectionOption(
         >
             <LabelledIcon
                 label=label
-                icon_src=icon_name
+                icon_name=Some(icon_name.clone())
+                icon_src=format!("./public/icons/side_bar/{}.png", icon_name)
                 class="labelled-icon-gap-12".to_string()
                 label_class="inter-normal-grey".to_string()
                 icon_class="icon-12".to_string()

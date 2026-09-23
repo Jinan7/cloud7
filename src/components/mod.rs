@@ -4,7 +4,6 @@ mod labelled_icon;
 mod sidebar_nav_option;
 mod sidebar;
 mod sidebar_nav;
-mod sidebar_workspaces_option;
 mod sidebar_workspaces;
 mod sidebar_section;
 mod sidebar_categories;
