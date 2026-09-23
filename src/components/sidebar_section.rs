@@ -31,7 +31,10 @@ pub fn SideBarSection(
                     key=|sidebar_section_option| sidebar_section_option.key.clone()
                     let(child)
                 >
-                    <SideBarSectionOption label=child.label.clone() icon_name=child.icon_name.clone() />
+                    <SideBarSectionOption
+                        label=child.label.clone()
+                        icon_name=child.icon_name.clone()
+                    />
                 </For>
             </div>
         </div>

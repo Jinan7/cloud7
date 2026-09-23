@@ -52,8 +52,11 @@ pub fn SideBarNavOption(
 
     let labelfn = label.clone();
     view! {
-        <div class=derived_class
-            on:click = move |_| { set_selected_side_bar_nav_option.set(SelectedSideBarNavOption(labelfn.clone()));}
+        <div
+            class=derived_class
+            on:click=move |_| {
+                set_selected_side_bar_nav_option.set(SelectedSideBarNavOption(labelfn.clone()));
+            }
         >
             <ReactiveLabelledIcon
                 label=label

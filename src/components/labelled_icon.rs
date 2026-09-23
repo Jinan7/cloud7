@@ -31,21 +31,25 @@ pub fn ReactiveLabelledIcon(
     let value = label.clone();
     view! {
         <div class=class>
-            { 
-                move || {
+            {move || {
+                match icon_name.clone() {
+                    Some(s) if s.as_str() == IconLabels::WORKSPACES => {
 
-                    match icon_name.clone() {
-                        Some(s) if s.as_str() == IconLabels::WORKSPACES => view! { <LayoutGrid class=icon_class.get()/> }.into_any(),
-                        Some(s) if s.as_str() == IconLabels::SEARCH => view! { <Search class=icon_class.get()/> }.into_any(),
-                        Some(s) if s.as_str() == IconLabels::NOTIFICATIONS => view! { <Bell class=icon_class.get()/> }.into_any(),
-                        Some(s) if s.as_str() == IconLabels::HOME => view! { <House class=icon_class.get()/> }.into_any(),
-                        _ => view! {
-                            <img class=icon_class src=icon_src />
-                        }.into_any()
-                    } 
-                }      
-            }
-            <p class=label_class>{value}</p>
+                        view! { <LayoutGrid class=icon_class.get() /> }
+                            .into_any()
+                    }
+                    Some(s) if s.as_str() == IconLabels::SEARCH => {
+                        view! { <Search class=icon_class.get() /> }.into_any()
+                    }
+                    Some(s) if s.as_str() == IconLabels::NOTIFICATIONS => {
+                        view! { <Bell class=icon_class.get() /> }.into_any()
+                    }
+                    Some(s) if s.as_str() == IconLabels::HOME => {
+                        view! { <House class=icon_class.get() /> }.into_any()
+                    }
+                    _ => view! { <img class=icon_class src=icon_src /> }.into_any(),
+                }
+            }} <p class=label_class>{value}</p>
         </div>
     }
 }
@@ -63,25 +67,30 @@ pub fn LabelledIcon(
 
     view! {
         <div class=class>
-            {
-                match icon_name {
-                    Some(s) if s == IconLabels::HOME => view! { <House class=icon_class/> }.into_any(),
-                    Some(s) if s == IconLabels::WORKSPACES => view! { <LayoutGrid class=icon_class/> }.into_any(),
-                    Some(s) if s == IconLabels::SEARCH => view! { <Search class=icon_class/> }.into_any(),
-                    Some(s) if s == IconLabels::NOTIFICATIONS => view! { <Bell class=icon_class/> }.into_any(),
-                    Some(s) if s == IconLabels::DOWN => view! { <ChevronDown class=icon_class/> }.into_any(),
-                    Some(s) if s == IconLabels::IMAGE => view! { <Image class=icon_class/> }.into_any(),
-                    Some(s) if s == IconLabels::FILM => view! { <Film class=icon_class/> }.into_any(),
-                    Some(s) if s == IconLabels::FILE => view! { <File class=icon_class/> }.into_any(),
-                    Some(s) if s == IconLabels::MUSIC => view! { <Music class=icon_class/> }.into_any(),
-                    Some(s) if s == IconLabels::USERS => view! { <Users class=icon_class/> }.into_any(),
-                    Some(s) if s == IconLabels::TRASH => view! { <Trash2 class=icon_class/> }.into_any(),
-                    _ => view! {
-                        <img class=icon_class src=icon_src />
-                    }.into_any()
-                }    
-            }
-            <p class=label_class>{label}</p>
+            {match icon_name {
+                Some(s) if s == IconLabels::HOME => view! { <House class=icon_class /> }.into_any(),
+                Some(s) if s == IconLabels::WORKSPACES => {
+                    view! { <LayoutGrid class=icon_class /> }.into_any()
+                }
+                Some(s) if s == IconLabels::SEARCH => {
+                    view! { <Search class=icon_class /> }.into_any()
+                }
+                Some(s) if s == IconLabels::NOTIFICATIONS => {
+                    view! { <Bell class=icon_class /> }.into_any()
+                }
+                Some(s) if s == IconLabels::DOWN => {
+                    view! { <ChevronDown class=icon_class /> }.into_any()
+                }
+                Some(s) if s == IconLabels::IMAGE => view! { <Image class=icon_class /> }.into_any(),
+                Some(s) if s == IconLabels::FILM => view! { <Film class=icon_class /> }.into_any(),
+                Some(s) if s == IconLabels::FILE => view! { <File class=icon_class /> }.into_any(),
+                Some(s) if s == IconLabels::MUSIC => view! { <Music class=icon_class /> }.into_any(),
+                Some(s) if s == IconLabels::USERS => view! { <Users class=icon_class /> }.into_any(),
+                Some(s) if s == IconLabels::TRASH => {
+                    view! { <Trash2 class=icon_class /> }.into_any()
+                }
+                _ => view! { <img class=icon_class src=icon_src /> }.into_any(),
+            }} <p class=label_class>{label}</p>
         </div>
     }
 }
@@ -100,18 +109,22 @@ pub fn InvertedLabelledIcon(
     view! {
         <div class=class>
             <p class=label_class>{label.clone()}</p>
-            {
-                match icon_name {
-                    Some(s) if s == IconLabels::HOME => view! { <House class=icon_class/> }.into_any(),
-                    Some(s) if s == IconLabels::WORKSPACES  => view! { <LayoutGrid class=icon_class/> }.into_any(),
-                    Some(s) if s == IconLabels::SEARCH  => view! { <Search class=icon_class/> }.into_any(),
-                    Some(s) if s == IconLabels::NOTIFICATIONS  => view! { <Bell class=icon_class/> }.into_any(),
-                    Some(s) if s == IconLabels::DOWN  => view! { <ChevronDown class=icon_class/> }.into_any(),
-                    _ => view! {
-                        <img class=icon_class src=icon_src />
-                    }.into_any()
-                }    
-            }    
+            {match icon_name {
+                Some(s) if s == IconLabels::HOME => view! { <House class=icon_class /> }.into_any(),
+                Some(s) if s == IconLabels::WORKSPACES => {
+                    view! { <LayoutGrid class=icon_class /> }.into_any()
+                }
+                Some(s) if s == IconLabels::SEARCH => {
+                    view! { <Search class=icon_class /> }.into_any()
+                }
+                Some(s) if s == IconLabels::NOTIFICATIONS => {
+                    view! { <Bell class=icon_class /> }.into_any()
+                }
+                Some(s) if s == IconLabels::DOWN => {
+                    view! { <ChevronDown class=icon_class /> }.into_any()
+                }
+                _ => view! { <img class=icon_class src=icon_src /> }.into_any(),
+            }}
         </div>
     }
 }

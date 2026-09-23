@@ -2,7 +2,6 @@ use leptos::prelude::*;
 
 use crate::components::{SideBarSectionOptionPayload, sidebar_section::{SelectedSideBarSectionOption, SideBarSection}};
 
-pub struct IconClass (pub String);
 
 #[component]
 pub fn SideBarWorkspaces() -> impl IntoView {
@@ -38,8 +37,5 @@ pub fn SideBarWorkspaces() -> impl IntoView {
 
     provide_context(sidebar_workspaces_options);
     provide_context((selected_sidebar_section_option, _set_selected_sidebar_section_option));
-    provide_context(IconClass("icon-12-grey".to_string()));
-    view! {
-        <SideBarSection label="Workspaces".to_string()/>
-    }
+    view! { <SideBarSection label="Workspaces".to_string() /> }
 }

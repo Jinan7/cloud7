@@ -8,11 +8,10 @@ pub fn SideBar() -> impl IntoView {
         <div class="sidebar">
             <div class="sidebar-header">
                 <SideBarNav />
-                <SideBarWorkspaces/>
-                <SideBarCategories/>
+                <SideBarWorkspaces />
+                <SideBarCategories />
             </div>
-            <div class="sidebar-footer">
-            </div>
+            <div class="sidebar-footer"></div>
         </div>
     }
 }

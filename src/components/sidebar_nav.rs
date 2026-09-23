@@ -44,17 +44,14 @@ pub fn SideBarNav() -> impl IntoView {
         <div class="sidebar-nav">
             // sidebar nav option
 
-            <For 
-                each = move || sidebar_nav_options.get()
-                key = |sidebar_nav_option| sidebar_nav_option.key.clone()
+            <For
+                each=move || sidebar_nav_options.get()
+                key=|sidebar_nav_option| sidebar_nav_option.key.clone()
                 let(child)
             >
-                <SideBarNavOption
-                    label=child.label.clone()
-                    icon_name=child.icon_name.clone()
-                />
+                <SideBarNavOption label=child.label.clone() icon_name=child.icon_name.clone() />
             </For>
-            
+
         </div>
     }
 }

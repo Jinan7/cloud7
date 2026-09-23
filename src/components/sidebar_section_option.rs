@@ -1,6 +1,6 @@
 use leptos::prelude::*;
 
-use crate::components::{IconClass, LabelledIcon, sidebar_categories, sidebar_section::SelectedSideBarSectionOption, sidebar_workspaces};
+use crate::components::{IconClass, LabelledIcon, sidebar_section::SelectedSideBarSectionOption, };
 
 
 
@@ -16,8 +16,12 @@ pub fn SideBarSectionOption(
    
     let value = label.clone();
     view! {
-        <div class="sidebar-section-option"
-            on:click = move |_| { set_selected_side_bar_section_option.set(SelectedSideBarSectionOption(value.clone()));}
+        <div
+            class="sidebar-section-option"
+            on:click=move |_| {
+                set_selected_side_bar_section_option
+                    .set(SelectedSideBarSectionOption(value.clone()));
+            }
         >
             <LabelledIcon
                 label=label
