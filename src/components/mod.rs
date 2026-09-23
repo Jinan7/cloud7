@@ -16,6 +16,6 @@ pub use sidebar_nav_option::SideBarNavOption;
 pub use sidebar::SideBar;
 pub use sidebar_nav::{SideBarNav, SelectedSideBarNavOption};
 pub use sidebar_workspaces::SideBarWorkspaces;
-pub use sidebar_categories::SideBarCategories;
+pub use sidebar_categories::{SideBarCategories, IconClass};
 pub use sidebar_section_option::SideBarSectionOption;
 pub use sidebar_section::{SelectedSideBarSectionOption, SideBarSectionOptionPayload};
