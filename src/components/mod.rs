@@ -4,6 +4,11 @@ mod labelled_icon;
 mod sidebar_nav_option;
 mod sidebar;
 mod sidebar_nav;
+mod sidebar_workspaces_option;
+mod sidebar_workspaces;
+mod sidebar_section;
+mod sidebar_categories;
+mod sidebar_section_option;
 
 pub use navbar::NavBar;
 pub use upload_button::UploadButton;
@@ -11,3 +16,7 @@ pub use labelled_icon::{LabelledIcon, ReactiveLabelledIcon, InvertedLabelledIcon
 pub use sidebar_nav_option::SideBarNavOption;
 pub use sidebar::SideBar;
 pub use sidebar_nav::{SideBarNav, SelectedSideBarNavOption};
+pub use sidebar_workspaces::SideBarWorkspaces;
+pub use sidebar_categories::SideBarCategories;
+pub use sidebar_section_option::SideBarSectionOption;
+pub use sidebar_section::{SelectedSideBarSectionOption, SideBarSectionOptionPayload};
