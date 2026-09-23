@@ -1,4 +1,4 @@
-use leptos::{attr::Icon, prelude::*};
+use leptos::{prelude::*};
 
 use crate::components::{SelectedSideBarSectionOption, SideBarSectionOptionPayload, labelled_icon::IconLabels, sidebar_section::SideBarSection};
 
