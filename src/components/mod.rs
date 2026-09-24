@@ -8,6 +8,7 @@ mod sidebar_workspaces;
 mod sidebar_section;
 mod sidebar_categories;
 mod sidebar_section_option;
+mod sidebar_footer;
 
 pub use navbar::NavBar;
 pub use upload_button::UploadButton;
@@ -19,3 +20,4 @@ pub use sidebar_workspaces::SideBarWorkspaces;
 pub use sidebar_categories::{SideBarCategories, IconClass};
 pub use sidebar_section_option::SideBarSectionOption;
 pub use sidebar_section::{SelectedSideBarSectionOption, SideBarSectionOptionPayload};
+pub use sidebar_footer::SideBarFooter;

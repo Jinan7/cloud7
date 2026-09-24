@@ -3,6 +3,8 @@ use leptos_router::{components::{ParentRoute, Route, Router, Routes}, path};
 
 use crate::pages::{Hero, Home, NotFound};
 
+
+
 #[component]
 pub fn App() -> impl IntoView {
 

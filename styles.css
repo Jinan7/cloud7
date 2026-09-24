@@ -105,17 +105,21 @@ img {
 
 .hero {
     display: flex;
+    min-height: 100vh;
 }
 
 
 
 .sidebar {   
     background: #f6f6f6; 
-}
-
-.sidebar-header {
     padding-top: 16px;
     padding-bottom: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.sidebar-header { 
     padding-left: 8px;
     padding-right: 8px;
     display: flex;
@@ -124,7 +128,8 @@ img {
 }
 
 .sidebar-footer {
-
+    padding-left: 8px;
+    padding-right: 8px;
 }
 
 .sidebar-nav {
@@ -142,6 +147,7 @@ img {
     border-radius: 8px;
     display: flex;
     gap: 10px;
+    cursor: pointer;
 
 }
 
@@ -177,17 +183,12 @@ img {
     padding-right: 16px;
     padding-bottom: 8px;
     padding-top: 8px;
+    cursor: pointer;
 }
-.sidebar-categories {
 
-}
 
 .hero-content {
     flex-grow: 1;
-}
-.home {
-    
-
 }
 
 .nav {
@@ -239,14 +240,3 @@ img {
     gap: 8px;
 }
 
-.search {
-
-}
-
-.recents {
-
-}
-
-.files {
-
-}

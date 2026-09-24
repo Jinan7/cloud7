@@ -1,5 +1,5 @@
 use leptos::prelude::*;
-use crate::components::{SideBarCategories, SideBarNav, SideBarWorkspaces};
+use crate::components::{SideBarCategories, SideBarNav, SideBarWorkspaces, SideBarFooter};
 
 #[component]
 pub fn SideBar() -> impl IntoView {
@@ -11,7 +11,9 @@ pub fn SideBar() -> impl IntoView {
                 <SideBarWorkspaces />
                 <SideBarCategories />
             </div>
-            <div class="sidebar-footer"></div>
+            <div class="sidebar-footer">
+                <SideBarFooter/>
+            </div>
         </div>
     }
 }

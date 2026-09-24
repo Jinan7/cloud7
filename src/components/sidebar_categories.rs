@@ -1,6 +1,6 @@
 use leptos::{prelude::*};
 
-use crate::components::{SelectedSideBarSectionOption, SideBarSectionOptionPayload, labelled_icon::IconLabels, sidebar_section::SideBarSection};
+use crate::components::{SelectedSideBarSectionOption, SideBarSectionOptionPayload, labelled_icon::IconNames, sidebar_section::SideBarSection};
 
 #[derive(Clone)]
 pub struct IconClass (pub String);
@@ -13,37 +13,37 @@ pub fn SideBarCategories() -> impl IntoView {
             SideBarSectionOptionPayload {
                 key: "Photo".to_string(),
                 label: "Photo".to_string(),
-                icon_name: IconLabels::IMAGE.to_owned(),
+                icon_name: IconNames::IMAGE.to_owned(),
 
             },
             SideBarSectionOptionPayload {
                 key: "Videos".to_string(),
                 label: "Videos".to_string(),
-                icon_name: IconLabels::FILM.to_owned(),
+                icon_name: IconNames::FILM.to_owned(),
 
             },
             SideBarSectionOptionPayload {
                 key: "Documents".to_string(),
                 label: "Documents".to_string(),
-                icon_name: IconLabels::FILE.to_owned(),
+                icon_name: IconNames::FILE.to_owned(),
 
             },
             SideBarSectionOptionPayload {
                 key: "Audio".to_string(),
                 label: "Audio".to_string(),
-                icon_name: IconLabels::MUSIC.to_owned(),
+                icon_name: IconNames::MUSIC.to_owned(),
 
             },
             SideBarSectionOptionPayload {
                 key: "Shared with me".to_string(),
                 label: "Shared with me".to_string(),
-                icon_name: IconLabels::USERS.to_owned(),
+                icon_name: IconNames::USERS.to_owned(),
 
             },
             SideBarSectionOptionPayload {
                 key: "Audio".to_string(),
                 label: "Audio".to_string(),
-                icon_name: IconLabels::MUSIC.to_owned(),
+                icon_name: IconNames::MUSIC.to_owned(),
 
             },
         ]

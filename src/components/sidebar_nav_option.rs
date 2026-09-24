@@ -54,7 +54,8 @@ pub fn SideBarNavOption(
     view! {
         <div
             class=derived_class
-            on:click=move |_| {
+            on:click=move |ev| {
+                ev.prevent_default();
                 set_selected_side_bar_nav_option.set(SelectedSideBarNavOption(labelfn.clone()));
             }
         >

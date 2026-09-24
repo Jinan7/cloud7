@@ -1,10 +1,10 @@
 use leptos::prelude::*;
-use icons::{Bell, ChevronDown, Film, House, Image, LayoutGrid, Music, Search, Users, Trash2, File};
+use icons::{Bell, ChevronDown, CircleHelp, File, Film, House, Image, LayoutGrid, Music, Search, Settings, Trash2, Users};
 
 
-pub struct IconLabels;
+pub struct IconNames;
 
-impl IconLabels {
+impl IconNames {
     pub const HOME: &'static str = "Home";
     pub const WORKSPACES: &'static str = "Workspaces";
     pub const SEARCH: &'static str = "Search";
@@ -16,6 +16,8 @@ impl IconLabels {
     pub const MUSIC: &'static str = "Music";
     pub const USERS: &'static str = "Users";
     pub const TRASH: &'static str = "Trash";
+    pub const SETTINGS: &'static str = "Settings";
+     pub const HELP: &'static str = "Help";
 }
 #[component]
 pub fn ReactiveLabelledIcon(
@@ -33,18 +35,18 @@ pub fn ReactiveLabelledIcon(
         <div class=class>
             {move || {
                 match icon_name.clone() {
-                    Some(s) if s.as_str() == IconLabels::WORKSPACES => {
+                    Some(s) if s.as_str() == IconNames::WORKSPACES => {
 
                         view! { <LayoutGrid class=icon_class.get() /> }
                             .into_any()
                     }
-                    Some(s) if s.as_str() == IconLabels::SEARCH => {
+                    Some(s) if s.as_str() == IconNames::SEARCH => {
                         view! { <Search class=icon_class.get() /> }.into_any()
                     }
-                    Some(s) if s.as_str() == IconLabels::NOTIFICATIONS => {
+                    Some(s) if s.as_str() == IconNames::NOTIFICATIONS => {
                         view! { <Bell class=icon_class.get() /> }.into_any()
                     }
-                    Some(s) if s.as_str() == IconLabels::HOME => {
+                    Some(s) if s.as_str() == IconNames::HOME => {
                         view! { <House class=icon_class.get() /> }.into_any()
                     }
                     _ => view! { <img class=icon_class src=icon_src /> }.into_any(),
@@ -68,26 +70,32 @@ pub fn LabelledIcon(
     view! {
         <div class=class>
             {match icon_name {
-                Some(s) if s == IconLabels::HOME => view! { <House class=icon_class /> }.into_any(),
-                Some(s) if s == IconLabels::WORKSPACES => {
+                Some(s) if s == IconNames::HOME => view! { <House class=icon_class /> }.into_any(),
+                Some(s) if s == IconNames::WORKSPACES => {
                     view! { <LayoutGrid class=icon_class /> }.into_any()
                 }
-                Some(s) if s == IconLabels::SEARCH => {
+                Some(s) if s == IconNames::SEARCH => {
                     view! { <Search class=icon_class /> }.into_any()
                 }
-                Some(s) if s == IconLabels::NOTIFICATIONS => {
+                Some(s) if s == IconNames::NOTIFICATIONS => {
                     view! { <Bell class=icon_class /> }.into_any()
                 }
-                Some(s) if s == IconLabels::DOWN => {
+                Some(s) if s == IconNames::DOWN => {
                     view! { <ChevronDown class=icon_class /> }.into_any()
                 }
-                Some(s) if s == IconLabels::IMAGE => view! { <Image class=icon_class /> }.into_any(),
-                Some(s) if s == IconLabels::FILM => view! { <Film class=icon_class /> }.into_any(),
-                Some(s) if s == IconLabels::FILE => view! { <File class=icon_class /> }.into_any(),
-                Some(s) if s == IconLabels::MUSIC => view! { <Music class=icon_class /> }.into_any(),
-                Some(s) if s == IconLabels::USERS => view! { <Users class=icon_class /> }.into_any(),
-                Some(s) if s == IconLabels::TRASH => {
+                Some(s) if s == IconNames::IMAGE => view! { <Image class=icon_class /> }.into_any(),
+                Some(s) if s == IconNames::FILM => view! { <Film class=icon_class /> }.into_any(),
+                Some(s) if s == IconNames::FILE => view! { <File class=icon_class /> }.into_any(),
+                Some(s) if s == IconNames::MUSIC => view! { <Music class=icon_class /> }.into_any(),
+                Some(s) if s == IconNames::USERS => view! { <Users class=icon_class /> }.into_any(),
+                Some(s) if s == IconNames::TRASH => {
                     view! { <Trash2 class=icon_class /> }.into_any()
+                }
+                Some(s) if s == IconNames::SETTINGS => {
+                    view! { <Settings class=icon_class /> }.into_any()
+                }
+                Some(s) if s == IconNames::HELP => {
+                    view! { <CircleHelp class=icon_class /> }.into_any()
                 }
                 _ => view! { <img class=icon_class src=icon_src /> }.into_any(),
             }} <p class=label_class>{label}</p>
@@ -110,17 +118,17 @@ pub fn InvertedLabelledIcon(
         <div class=class>
             <p class=label_class>{label.clone()}</p>
             {match icon_name {
-                Some(s) if s == IconLabels::HOME => view! { <House class=icon_class /> }.into_any(),
-                Some(s) if s == IconLabels::WORKSPACES => {
+                Some(s) if s == IconNames::HOME => view! { <House class=icon_class /> }.into_any(),
+                Some(s) if s == IconNames::WORKSPACES => {
                     view! { <LayoutGrid class=icon_class /> }.into_any()
                 }
-                Some(s) if s == IconLabels::SEARCH => {
+                Some(s) if s == IconNames::SEARCH => {
                     view! { <Search class=icon_class /> }.into_any()
                 }
-                Some(s) if s == IconLabels::NOTIFICATIONS => {
+                Some(s) if s == IconNames::NOTIFICATIONS => {
                     view! { <Bell class=icon_class /> }.into_any()
                 }
-                Some(s) if s == IconLabels::DOWN => {
+                Some(s) if s == IconNames::DOWN => {
                     view! { <ChevronDown class=icon_class /> }.into_any()
                 }
                 _ => view! { <img class=icon_class src=icon_src /> }.into_any(),
