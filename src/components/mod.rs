@@ -9,6 +9,8 @@ mod sidebar_section;
 mod sidebar_categories;
 mod sidebar_section_option;
 mod sidebar_footer;
+mod search_section;
+mod searchbar;
 
 pub use navbar::NavBar;
 pub use upload_button::UploadButton;
@@ -21,3 +23,5 @@ pub use sidebar_categories::{SideBarCategories, IconClass};
 pub use sidebar_section_option::SideBarSectionOption;
 pub use sidebar_section::{SelectedSideBarSectionOption, SideBarSectionOptionPayload};
 pub use sidebar_footer::SideBarFooter;
+pub use search_section::SearchSection;
+pub use searchbar::SearchBar;

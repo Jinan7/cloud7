@@ -5,6 +5,7 @@
     --blue-transparent-10: rgba(73, 127, 255, 0.1);
     --grey: #5b5b5b;
     --grey-2: #7c7c7c;
+    --grey-3: #f4f3f3;
 }
 .inter-normal-black {
     font-family: "Inter", sans-serif;
@@ -39,6 +40,13 @@
     font-style: normal;
     font-size: 12px;
     font-weight: 568;
+    color: var(--grey-2);
+}
+
+.inter-20-grey {
+    font-family: "Inter", sans-serif;
+    font-style: normal;
+    font-size: 20px;
     color: var(--grey-2);
 }
 
@@ -240,3 +248,25 @@ img {
     gap: 8px;
 }
 
+.search {
+    padding: 40px 40px 10px 40px;
+}
+
+.search-bar {
+    width: 100%;
+    padding: 12px 16px 12px 16px;
+    border-radius: 8px;
+    background: var(--grey-3);
+    border: 0px none transparent;
+}
+
+.search-bar:focus {
+    outline: none;
+}
+
+.search-bar::placeholder {
+    font-family: "Inter", sans-serif;
+    font-style: normal;
+    font-size: 20px;
+    color: var(--grey-2);
+}
