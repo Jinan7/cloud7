@@ -1,18 +1,14 @@
 use leptos::prelude::*;
 
+use crate::{components::SearchSection, pages::components::home::Recents};
+
 #[component]
 pub fn Home() -> impl IntoView {
     
     view! {
         <div class="home">
-            <div class="search">
-                <input class="search-bar inter-20-grey" 
-                placeholder="Search"
-                >
-                    <p class="inter-20">"Search"</p>
-                </input>
-            </div>
-            <div class="recents"></div>
+            <SearchSection/>
+            <Recents/>
             <div class="files"></div>
         </div>
     }
