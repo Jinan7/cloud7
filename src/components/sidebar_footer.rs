@@ -6,7 +6,7 @@ use crate::components::{SideBarSectionOptionPayload, labelled_icon::IconNames, S
 #[component]
 pub fn SideBarFooter() -> impl IntoView {
 
-    let (sidebar_footer_options, set_sidebar_footer_options )  = signal(
+    let (sidebar_footer_options, _set_sidebar_footer_options )  = signal(
         vec![
             SideBarSectionOptionPayload {
                 key: "Settings".to_string(),
