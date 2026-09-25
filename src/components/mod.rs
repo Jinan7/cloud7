@@ -11,6 +11,7 @@ mod sidebar_section_option;
 mod sidebar_footer;
 mod search_section;
 mod searchbar;
+mod file_item;
 
 pub use navbar::NavBar;
 pub use upload_button::UploadButton;
@@ -25,3 +26,4 @@ pub use sidebar_section::{SelectedSideBarSectionOption, SideBarSectionOptionPayl
 pub use sidebar_footer::SideBarFooter;
 pub use search_section::SearchSection;
 pub use searchbar::SearchBar;
+pub use file_item::FileItem;

@@ -1,6 +1,6 @@
 use leptos::prelude::*;
 
-use crate::{components::SearchSection, pages::components::home::Recents};
+use crate::{components::SearchSection, pages::components::home::{Files, Recents}};
 
 #[component]
 pub fn Home() -> impl IntoView {
@@ -9,7 +9,7 @@ pub fn Home() -> impl IntoView {
         <div class="home">
             <SearchSection/>
             <Recents/>
-            <div class="files"></div>
+            <Files/>
         </div>
     }
 }
