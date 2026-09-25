@@ -8,7 +8,7 @@ struct File{
 #[component]
 pub fn Files() -> impl IntoView {
     
-    let (files, set_files) = signal(
+    let (files, _set_files) = signal(
         vec![
             File {
                 name: "Document".to_string()
