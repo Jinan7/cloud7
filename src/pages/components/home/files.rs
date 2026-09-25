@@ -38,7 +38,7 @@ pub fn Files() -> impl IntoView {
             <FileFilterSection/>
             <div class="files-content">
                 <For 
-                    each = move || files
+                    each = move || files.get()
                     key = |file| file.name.clone()
                     let(child)
                 >
