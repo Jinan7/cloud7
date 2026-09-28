@@ -8,7 +8,7 @@ pub fn NavBar() -> impl IntoView {
             <div class="nav-content">
                 <LabelledIcon
                     label="Home".to_string()
-                    icon_name=Some("home".to_string())
+                    icon_name=Some("Home".to_string())
                     icon_src="./public/home.png".to_string()
                     class="labelled-icon-gap-12".to_string()
                     label_class="inter-normal-black".to_string()
