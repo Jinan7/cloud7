@@ -33,7 +33,7 @@ pub fn Files() -> impl IntoView {
     view! {
         <div class="files">
             <div class="files-header">
-                <p class="">"All files"</p>
+                <p class="inter-normal-black">"All files"</p>
             </div>
             <FileFilterSection/>
             <div class="files-content">
