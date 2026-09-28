@@ -1,4 +1,3 @@
-use gloo_file::callbacks::read_as_bytes;
 use icons::Upload;
 use leptos::{html, prelude::*};
 use web_sys::{Event, HtmlInputElement, wasm_bindgen::JsCast};
