@@ -9,5 +9,7 @@ leptos = { version = "0.8.20", features = ["csr"] }
 leptos_router = "0.8.15"
 icons = { version = "0.18.3", features = ["leptos"] }
 rfd = "0.17.2"
+web-sys = "0.3.106"
+gloo-file = { version = "0.4.0", features = ["futures"] }
 
 
