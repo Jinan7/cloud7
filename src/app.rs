@@ -9,6 +9,7 @@ use crate::pages::{Hero, Home, NotFound};
 pub fn App() -> impl IntoView {
 
     view! {
+        
         <Router>
             <nav></nav>
             <main>

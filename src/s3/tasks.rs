@@ -3,7 +3,7 @@ use crate::s3::{create_multipart_upload, upload_parts};
 
 
 pub async fn multipart_upload(
-    client: aws_sdk_s3::Client,
+    client: &aws_sdk_s3::Client,
     bucket: &str,
     key: &str,
     file: &[u8],

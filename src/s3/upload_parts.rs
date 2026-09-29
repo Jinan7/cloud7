@@ -39,10 +39,7 @@ pub async fn upload_parts(
     let mut buffer: [u8;CHUNK_SIZE as usize] = [0;CHUNK_SIZE as usize];
 
     for chunk_index in 0..chunk_count {
-
-        
-        
-        
+    
         let len = file_reader.read(&mut buffer)?;
             
         let stream = primitives::ByteStream::from(bytes::Bytes::copy_from_slice(&buffer[0..len]));

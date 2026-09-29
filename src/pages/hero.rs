@@ -1,7 +1,7 @@
 use leptos::prelude::*;
 use leptos_router::components::Outlet;
 
-use crate::components::{NavBar, SideBar};
+use crate::{components::{NavBar, SideBar}};
 
 #[component]
 pub fn Hero() -> impl IntoView {

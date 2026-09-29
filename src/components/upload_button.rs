@@ -1,16 +1,13 @@
-use gloo_file::FileReadError;
 use icons::Upload;
 use leptos::{html, prelude::*, reactive::spawn_local};
-use tokio::io::AsyncReadExt;
 use web_sys::{Event, HtmlInputElement, wasm_bindgen::JsCast};
 
-use crate::s3;
+use crate::s3::{self, get_s3_client};
 
 
 #[component]
 pub fn UploadButton() -> impl IntoView {
 
-    let (file_path, set_file_path) = signal("Upload file".to_string());
     let file_input: NodeRef<html::Input> = NodeRef::new();
 
     let upload_file_handler = move |ev: Event| {
@@ -33,7 +30,8 @@ pub fn UploadButton() -> impl IntoView {
 
             
             if let Some(file_bytes) = file_bytes_result {
-                let err = s3::tasks::multipart_upload(todo!(), todo!(),&file_name, file_bytes.as_ref(), file.size())
+                let client = get_s3_client().await;
+                let err = s3::tasks::multipart_upload(&client, "my-bucket",&file_name, &file_bytes, file.size())
                 .await
                 .err();
 
@@ -54,7 +52,7 @@ pub fn UploadButton() -> impl IntoView {
          
         <label for="upload_file" class="upload-button">
             <Upload class="icon-20-white" />
-            <p class="inter-normal-white">{move || file_path.get()}</p>
+            <p class="inter-normal-white">"Upload file"</p>
         </label>
         <input 
             type="file"
