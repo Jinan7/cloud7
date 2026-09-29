@@ -36,7 +36,7 @@ pub fn UploadButton() -> impl IntoView {
                 .err();
 
                 if let Some(e) = err {
-                    todo!()
+                    print!("{e}");
                 }
             }
             
