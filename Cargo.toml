@@ -15,5 +15,6 @@ aws-sdk-s3 = "1.150.0"
 aws-config = { version = "1.12.0", features = ["credentials-login"] }
 tokio = { version = "1.53.1", features = ["full", "rt-multi-thread"] }
 anyhow = "1.0.104"
+bytes = "1.12.1"
 
 

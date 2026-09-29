@@ -739,6 +739,7 @@ dependencies = [
  "anyhow",
  "aws-config",
  "aws-sdk-s3",
+ "bytes",
  "console_error_panic_hook",
  "gloo-file",
  "icons",

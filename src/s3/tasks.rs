@@ -6,7 +6,8 @@ pub async fn multipart_upload(
     client: aws_sdk_s3::Client,
     bucket: &str,
     key: &str,
-    file: &[u8]
+    file: &[u8],
+    file_size: u64,
 ) -> anyhow::Result<()> {
 
     let create_multipart_upload_res = create_multipart_upload(&client, bucket, key)
@@ -17,7 +18,7 @@ pub async fn multipart_upload(
         .upload_id()
         .context("Upload failed")?;
 
-    upload_parts(client, bucket, key, upload_id, file)
+    upload_parts(&client, bucket, key, upload_id, file, file_size)
         .await
         .context("Upload failed")?;
 

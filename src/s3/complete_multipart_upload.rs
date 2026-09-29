@@ -3,7 +3,7 @@ use aws_sdk_s3::{operation::complete_multipart_upload, types};
 
 
 pub async fn complete_multipart_upload(
-    client: aws_sdk_s3::Client,
+    client: &aws_sdk_s3::Client,
     bucket: &str,
     key: &str,
     upload_id: &str,

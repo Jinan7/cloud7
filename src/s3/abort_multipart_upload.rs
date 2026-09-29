@@ -1,6 +1,6 @@
 
 pub async fn abort_multipart_upload(
-    client: aws_sdk_s3::Client,
+    client: &aws_sdk_s3::Client,
     bucket: &str,
     key: &str,
     upload_id: &str,
