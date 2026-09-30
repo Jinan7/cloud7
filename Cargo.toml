@@ -8,13 +8,8 @@ console_error_panic_hook = "0.1.7"
 leptos = { version = "0.8.20", features = ["csr"] }
 leptos_router = "0.8.15"
 icons = { version = "0.18.3", features = ["leptos"] }
-rfd = "0.17.2"
 web-sys = "0.3.106"
-gloo-file = { version = "0.4.0", features = ["futures"] }
-aws-sdk-s3 = "1.150.0"
-aws-config = { version = "1.12.0", features = ["credentials-login"] }
-tokio = { version = "1.53.1", features = ["full", "rt-multi-thread"] }
-anyhow = "1.0.104"
-bytes = "1.12.1"
+reqwest = "0.13.5"
+
 
 
