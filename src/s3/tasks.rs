@@ -1,26 +1,68 @@
-use anyhow::Context;
-use crate::s3::{create_multipart_upload, upload_parts};
+use chrono::Utc;
 
-
-pub async fn multipart_upload(
-    client: &aws_sdk_s3::Client,
-    bucket: &str,
+use crate::s3::actions::{CreateMultipartResponse, Part, complete_multipart_upload, create_multipart_upload, upload_parts};
+async fn upload(
     key: &str,
-    file: &[u8],
-    file_size: u64,
-) -> anyhow::Result<()> {
+    mut file: std::fs::File
+) -> Result<(), anyhow::Error> {
+    
+    dotenvy::dotenv().ok();
+    let access_key = std::env::var("ACCESS_KEY")?;
+    let secret = std::env::var("SECRET")?;
+    let bucket = std::env::var("BUCKET")?;
 
-    let create_multipart_upload_res = create_multipart_upload(&client, bucket, key)
-        .await
-        .context("Upload failed")?;
+    let CreateMultipartResponse { upload_id } = create_multipart_upload(
+        &bucket, 
+        key, 
+        Utc::now(), 
+        &access_key, 
+        &secret
+    )
+    .await?;
 
-    let upload_id = create_multipart_upload_res
-        .upload_id()
-        .context("Upload failed")?;
+    let response = upload_parts(
+        &bucket, 
+        key, 
+        &upload_id, 
+        file, 
+        &access_key, 
+        &secret
+    ).await?;
 
-    upload_parts(&client, bucket, key, upload_id, file, file_size)
-        .await
-        .context("Upload failed")?;
+    let parts = get_parts_xml_string(response);
+
+    let response = complete_multipart_upload(
+        &bucket, 
+        key, 
+        &upload_id, 
+        parts, 
+        Utc::now(), 
+        &access_key, 
+        &secret
+    )
+    .await?;
 
     Ok(())
+}
+
+
+fn get_part_xml_string(
+    part: &Part
+) -> String {
+
+    format!("<Part><ETag>{}</ETag><PartNumber>{}</PartNumber></Part>", part.e_tag, part.part_number)
+}
+
+fn get_parts_xml_string(
+    parts: Vec<Part>,
+) -> String {
+
+    let parts: Vec<String> = parts.iter()
+        .map(|part | {
+            get_part_xml_string(part)
+        })
+        .collect();
+
+    let parts_xml_string = parts.join("");
+    format!("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<CompleteMultipartUpload xmlns=\"http://s3.amazonaws.com/doc/2006-03-01/\">{}</CompleteMultipartUpload>", parts_xml_string)
 }
