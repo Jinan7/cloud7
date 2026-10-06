@@ -5,11 +5,12 @@ pub async fn upload(
     key: String,
     file: &[u8]
 ) -> Result<(), anyhow::Error> {
-    
+
     dotenvy::dotenv().ok();
-    let access_key = std::env::var("ACCESS_KEY")?;
-    let secret = std::env::var("SECRET")?;
-    let bucket = std::env::var("BUCKET")?;
+    
+    let access_key = "";
+    let secret = "";
+    let bucket = "";
 
     let CreateMultipartResponse { upload_id } = create_multipart_upload(
         &bucket, 
@@ -30,7 +31,7 @@ pub async fn upload(
     ).await?;
 
     let parts = get_parts_xml_string(response);
-
+    leptos::logging::log!("parts : {}", &parts);
     complete_multipart_upload(
         &bucket, 
         &key, 

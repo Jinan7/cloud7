@@ -27,6 +27,7 @@ pub async fn upload_part(
     let address = format!("https://{}/{}?partNumber={}&uploadId={}", &host, key, part_number, upload_id);
 
     let payload_hash = get_payload_hash(chunk);
+    
     let mut headers = HashMap::new();
     headers.insert(HOST.to_string(), host);
     headers.insert(X_AMZ_CONTENT_SHA256.to_string(), payload_hash.clone());
@@ -46,7 +47,6 @@ pub async fn upload_part(
         &payload_hash
     );
 
-    println!("{canonical_request}");
 
     let signature = signature_v2(date, "eu-north-1", "s3", &canonical_request, secret);
 

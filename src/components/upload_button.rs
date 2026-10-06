@@ -19,6 +19,7 @@ pub fn UploadButton() -> impl IntoView {
 
             
         ev.prevent_default();
+        
         let input: HtmlInputElement = ev.target().unwrap().unchecked_into();
 
         let files = input.files().unwrap();
@@ -48,24 +49,22 @@ pub fn UploadButton() -> impl IntoView {
         
         let file = gloo_file::File::from(file);
     
-        
+
         
         spawn_local(async move {
-                
+            leptos::logging::log!("reading file bytes");  
             let file_bytes = gloo_file::futures::read_as_bytes(&file).await;
 
             if let Ok(file_bytes) = file_bytes {
+               
                 let err = s3::tasks::upload(file_name, &file_bytes[..])
                 .await
                 .err();
 
                 if let Some(e) = err {
-                    print!("{e}");
+                    leptos::logging::log!("{e}");
                 }
-            }
-
-            
-            
+            }     
         
         });
             

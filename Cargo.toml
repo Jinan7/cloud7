@@ -22,6 +22,7 @@ sha2 = "0.11.0"
 gloo-file = { version = "0.4.0", features = ["futures"] }
 uuid = { version = "1.27.0", features = ["js", "v4"] }
 reactive_stores = "0.4.4"
+config = "0.15.27"
 
 
 
