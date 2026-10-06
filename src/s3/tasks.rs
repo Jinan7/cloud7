@@ -1,9 +1,9 @@
 use chrono::Utc;
 
 use crate::s3::actions::{CreateMultipartResponse, Part, complete_multipart_upload, create_multipart_upload, upload_parts};
-async fn upload(
-    key: &str,
-    file: std::fs::File
+pub async fn upload(
+    key: String,
+    file: &[u8]
 ) -> Result<(), anyhow::Error> {
     
     dotenvy::dotenv().ok();
@@ -13,7 +13,7 @@ async fn upload(
 
     let CreateMultipartResponse { upload_id } = create_multipart_upload(
         &bucket, 
-        key, 
+        &key, 
         Utc::now(), 
         &access_key, 
         &secret
@@ -22,7 +22,7 @@ async fn upload(
 
     let response = upload_parts(
         &bucket, 
-        key, 
+        &key, 
         &upload_id, 
         file, 
         &access_key, 
@@ -33,7 +33,7 @@ async fn upload(
 
     complete_multipart_upload(
         &bucket, 
-        key, 
+        &key, 
         &upload_id, 
         parts, 
         Utc::now(), 

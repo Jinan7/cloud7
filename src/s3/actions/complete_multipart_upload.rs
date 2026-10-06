@@ -3,7 +3,7 @@ use std::collections::HashMap;
 use chrono::{DateTime, Utc};
 use reqwest::Response;
 
-use crate::s3::utils::{get_auth_header, get_canonical_request_v2, get_empty_string_hash, get_host_and_uri, get_payload_hash, get_scope, headers::{AUTHORIZATION, HOST, X_AMZ_CONTENT_SHA256, X_AMZ_DATE}, post, signature_v2, to_iso8601};
+use crate::s3::utils::{get_auth_header, get_canonical_request_v2, get_host_and_uri, get_payload_hash, get_scope, headers::{AUTHORIZATION, HOST, X_AMZ_CONTENT_SHA256, X_AMZ_DATE}, post, signature_v2, to_iso8601};
 
 pub async fn complete_multipart_upload(
     bucket: &str,

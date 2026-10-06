@@ -1,8 +1,9 @@
 use icons::Upload;
 use leptos::{html, prelude::*, reactive::spawn_local};
+use reactive_stores::StoreFieldIterator;
 use web_sys::{Event, HtmlInputElement, wasm_bindgen::JsCast};
 
-use crate::context::{UploadPayload, UploadsStoreFields, use_upload_context};
+use crate::{context::{UploadPayload, UploadPayloadStoreFields, UploadsStoreFields, use_upload_context}, s3};
 
 // use crate::s3::{self, get_s3_client};
 
@@ -22,41 +23,51 @@ pub fn UploadButton() -> impl IntoView {
 
         let files = input.files().unwrap();
         let file = files.get(0).unwrap();
+         
         let file_name = file.name();
 
+        let key = uuid::Uuid::new_v4();
+
         let new_upload = UploadPayload {
-            key: uuid::Uuid::new_v4(),
-            file_name,
+            key,
+            file_name: file_name.clone(),
             percentage: 40
         };
 
         uploads.rows().update(|rows|{
             rows.push(new_upload);
         });
-        // let file = gloo_file::File::from(file);
+
+        let upload = uploads.rows()
+            .iter_unkeyed().
+            find(|row| {
+                row.key().get() == key
+            });
+        
+        if upload.is_none() {return}
+        
+        let file = gloo_file::File::from(file);
     
         
         
-        // spawn_local(async move {
-        //     let file_bytes_result = gloo_file::futures::read_as_bytes(&file)
-        //         .await
-        //         .ok();
+        spawn_local(async move {
+                
+            let file_bytes = gloo_file::futures::read_as_bytes(&file).await;
+
+            if let Ok(file_bytes) = file_bytes {
+                let err = s3::tasks::upload(file_name, &file_bytes[..])
+                .await
+                .err();
+
+                if let Some(e) = err {
+                    print!("{e}");
+                }
+            }
 
             
-        //     if let Some(file_bytes) = file_bytes_result {
-        //         let client = get_s3_client().await;
-        //         let err = s3::tasks::multipart_upload(&client, "my-bucket",&file_name, &file_bytes, file.size())
-        //         .await
-        //         .err();
-
-        //         if let Some(e) = err {
-        //             print!("{e}");
-        //         }
-        //     }
             
-                
-                
-        // });
+        
+        });
             
                     
     };

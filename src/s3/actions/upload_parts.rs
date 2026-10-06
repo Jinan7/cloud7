@@ -14,7 +14,7 @@ pub async fn upload_parts(
     bucket: &str,
     key: &str,
     upload_id: &str,
-    mut file: std::fs::File,
+    mut file: &[u8],
     access: &str,
     secret: &str,
 ) -> Result<Vec<Part>, anyhow::Error> {
