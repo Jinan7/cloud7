@@ -25,7 +25,7 @@ pub fn Context(
 
     provide_context(uploads);
     view! {
-        || {children()} 
+        {children()} 
     }
 }
 
