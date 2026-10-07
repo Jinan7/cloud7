@@ -2,7 +2,7 @@ use std::net::TcpListener;
 
 use actix_web::{App, HttpServer, dev::Server, web};
 
-use crate::{configuration::{Settings, get_configuration}, routes::health_check};
+use crate::{configuration::{Settings}, routes::health_check};
 
 pub struct Application {
     server: Server,
