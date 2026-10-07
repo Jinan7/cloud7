@@ -1,19 +1,18 @@
 use std::net::TcpListener;
 
-use actix_web::{App, HttpServer, dev::Server};
+use actix_web::{App, HttpServer, dev::Server, web};
 
-use crate::configuration::get_configuration;
+use crate::{configuration::{Settings, get_configuration}, routes::health_check};
 
 pub struct Application {
     server: Server,
-    port: u16,
+    pub port: u16,
 }
 
 impl Application {
 
-    pub async fn build() -> Self {
+    pub async fn build(config: Settings) -> Self {
 
-        let config = get_configuration().expect("failed to get configuration");
 
         let listener = TcpListener::bind(format!("{}:{}", config.application.host, config.application.port)).expect("failed to bind address");
 
@@ -33,6 +32,7 @@ pub async fn run(listener: TcpListener) -> Result<Server, std::io::Error> {
     let server = HttpServer::new(
         || {
             App::new()
+                .route("/health_check", web::get().to(health_check))
         }
     )
     .listen(listener)?

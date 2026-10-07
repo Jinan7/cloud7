@@ -1,5 +1,3 @@
-use anyhow::Context;
-
 #[derive(serde::Deserialize, Debug)]
 pub struct Settings {
     pub application: ApplicationSettings,
@@ -41,19 +39,17 @@ impl AsRef<str> for ENVIRONMENT {
 }
 
 
-pub fn get_configuration() -> anyhow::Result<Settings> {
+pub fn get_configuration() -> Settings {
 
     let environment: ENVIRONMENT = std::env::var("ENVIRONMENT")
         .unwrap_or_else(
             |_| "local".into()
         )
         .try_into()
-        .map_err(|e: String| {
-            anyhow::anyhow!(e)
-        })?;
+        .expect("failed to read environment");
 
     let base_dir = {
-        let root_dir = std::env::current_dir()?;
+        let root_dir = std::env::current_dir().expect("could not read root directory");
         root_dir.join("configuration")
     };
 
@@ -63,11 +59,12 @@ pub fn get_configuration() -> anyhow::Result<Settings> {
     let config = config::Config::builder()
         .add_source(config::File::from(base_config_path))
         .add_source(config::File::from(environment_config_path))
-        .build()?;
+        .build()
+        .expect("failed to build config");
 
-    let settings = config.try_deserialize::<Settings>()?;
+    let settings = config.try_deserialize::<Settings>().expect("failed to deserialize config");
 
-    Ok(settings)
+    settings
 }
 
 
@@ -78,7 +75,7 @@ mod test {
     #[test]
     fn get_configuration_test() {
 
-        let settings = get_configuration().expect("failed to get configuration");
+        let settings = get_configuration();
         dbg!(settings);
     }
 }

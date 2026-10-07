@@ -1,8 +1,9 @@
-use server::startup::Application;
+use server::{configuration::get_configuration, startup::Application};
 
 #[tokio::main]
 async fn main() {
     
-    let app = Application::build().await;
+    let config = get_configuration();
+    let app = Application::build(config).await;
     app.run().await;
 }
