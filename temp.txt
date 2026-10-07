@@ -1,5 +1,0 @@
-aws-sdk-s3 = "1.150.0"
-aws-config = { version = "1.12.0", features = ["credentials-login"] }
-anyhow = "1.0.104"
-bytes = "1.12.1"
-gloo-file = { version = "0.4.0", features = ["futures"] }
