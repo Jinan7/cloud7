@@ -1,6 +1,7 @@
 #[derive(serde::Deserialize, Debug)]
 pub struct Settings {
     pub application: ApplicationSettings,
+    pub s3: S3Settings,
 }
 
 #[derive(serde::Deserialize, Debug)]
@@ -9,6 +10,10 @@ pub struct ApplicationSettings {
     pub port: u16,
 }
 
+#[derive(serde::Deserialize, Debug)]
+pub struct S3Settings {
+    pub bucket: String,
+}
 enum ENVIRONMENT {
     LOCAL,
     PRODUCTION
