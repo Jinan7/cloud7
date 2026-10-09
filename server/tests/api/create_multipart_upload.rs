@@ -11,7 +11,7 @@ async fn create_multipart_upload_returns_200() {
         .expect("failed to create multipart upload");
 
     assert_eq!(response.status().as_u16(), 200);
-    let response = String::from_utf8(response.bytes().await.unwrap().to_vec());
+    let response = String::from_utf8(response.bytes().await.unwrap().to_vec()).expect("Failed to deserialize response");
 
     dbg!(response);
 }

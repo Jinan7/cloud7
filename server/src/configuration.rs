@@ -13,6 +13,7 @@ pub struct ApplicationSettings {
 #[derive(serde::Deserialize, Debug)]
 pub struct S3Settings {
     pub bucket: String,
+    pub expires_in: u64,
 }
 enum ENVIRONMENT {
     LOCAL,
