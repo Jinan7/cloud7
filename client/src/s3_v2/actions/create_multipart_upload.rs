@@ -11,7 +11,7 @@ pub async fn create_multipart_upload_v2(
 ) -> Result<CreateMultipartUploadResponse, anyhow::Error>{
 
     let response = reqwest::Client::new()
-        .get("http://localhost:8000/files/create_multipart/{key}")
+        .get(format!("http://localhost:8000/files/create_multipart/{}", key))
         .send()
         .await?;
 
