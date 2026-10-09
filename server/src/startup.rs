@@ -39,7 +39,10 @@ pub async fn run(listener: TcpListener, bucket: S3Bucket ) -> Result<Server, std
         move || {
             App::new()
                 .route("/health_check", web::get().to(health_check))
-                .route("/create_multipart/{key}", web::get().to(create_multipart_upload))
+                .service(
+                    web::scope("/files")
+                    .route("/create_multipart/{key}", web::get().to(create_multipart_upload))
+                )
                 .app_data(bucket.clone())
         }
     )

@@ -1,5 +1,5 @@
 use anyhow::Context;
-use aws_sdk_s3::operation::{create_multipart_upload::CreateMultipartUploadOutput, get_object::GetObjectError::NoSuchKey};
+use aws_sdk_s3::operation::{create_multipart_upload::CreateMultipartUploadOutput};
 
 pub async fn create_multipart_upload(
     client: &aws_sdk_s3::Client,
