@@ -4,7 +4,7 @@ use serde::Deserialize;
 use crate::{s3, startup::{PresignedExpiresIn, S3Bucket}, utils::e500};
 
 #[derive(Debug, Deserialize)]
-pub struct FormData {
+pub struct UploadFormData {
     key: String,
     upload_id: String,
     part_number: i32,
@@ -17,7 +17,7 @@ pub struct UploadPartResponse {
 pub async fn upload_part_presigned(
     client: web::Data<aws_sdk_s3::Client>,
     bucket: web::Data<S3Bucket>,
-    file: web::Json<FormData>,
+    file: web::Json<UploadFormData>,
     expires_in: web::Data<PresignedExpiresIn>
 ) -> Result<HttpResponse, actix_web::Error> {
 
