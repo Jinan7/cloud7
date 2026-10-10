@@ -25,7 +25,13 @@ pub async fn complete_multipart_upload(
 
     let payload = serde_json::to_string(&payload)?;
 
-    dbg!(payload);
+    reqwest::Client::new()
+        .post("http://localhost:8000/files/complete_multipart_upload")
+        .body(payload)
+        .send()
+        .await?
+        .error_for_status()?;
+
     Ok(())
 }
 

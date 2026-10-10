@@ -1,10 +1,11 @@
-use crate::s3_v2::actions::{Part, upload_part};
+use crate::s3_v2::actions::{Part, UploadPartPresignedResponse, upload_part, upload_part_presigned};
 use std::io::Read;
 
 const CHUNK_SIZE: u64 = 5*1024*1024;
 
 pub async fn upload_parts(
-    presigned_url: &str,
+    key: &str,
+    upload_id: &str,
     mut file: &[u8]
 ) -> Result<Vec<Part>, anyhow::Error> {
 
@@ -19,9 +20,10 @@ pub async fn upload_parts(
             break;
         }
 
-
+        let UploadPartPresignedResponse { presigned_url } = upload_part_presigned(&key, upload_id, part_number).await?;
+        
         let _response = upload_part(  
-            presigned_url,
+            &presigned_url,
             &buffer,
         ).await;
 
