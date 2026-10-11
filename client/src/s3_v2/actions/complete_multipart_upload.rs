@@ -25,13 +25,16 @@ pub async fn complete_multipart_upload(
 
     let payload = serde_json::to_string(&payload)?;
 
+    leptos::logging::log!("{}", &payload);
     reqwest::Client::new()
         .post("http://localhost:8000/files/complete_multipart_upload")
+        .header("Content-Type", "application/json")
         .body(payload)
         .send()
         .await?
         .error_for_status()?;
 
+    leptos::logging::log!("Success");
     Ok(())
 }
 

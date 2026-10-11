@@ -1,4 +1,4 @@
-use crate::s3_v2::actions::{Part, UploadPartPresignedResponse, upload_part, upload_part_presigned};
+use crate::s3_v2::actions::{Part, UploadPartPresignedResponse, UploadPartResponse, upload_part, upload_part_presigned};
 use std::io::Read;
 
 const CHUNK_SIZE: u64 = 5*1024*1024;
@@ -21,30 +21,21 @@ pub async fn upload_parts(
         }
 
         let UploadPartPresignedResponse { presigned_url } = upload_part_presigned(&key, upload_id, part_number).await?;
-        
-        let _response = upload_part(  
+        leptos::logging::log!("Part {}", part_number);
+        leptos::logging::log!("     presigned_url: {}", &presigned_url);
+
+        let UploadPartResponse { e_tag } = upload_part(  
             &presigned_url,
             &buffer,
-        ).await;
+        ).await?;
 
-        // if let Err(e) = response {
-        //     leptos::logging::log!("{e}")
-        // } else {
-        //     parts.push(
-        //         Part {
-        //             e_tag: response.unwrap().e_tag,
-        //             part_number
-        //         }
-        //     );
-        // }
-
+        
         parts.push(
             Part {
-                e_tag: uuid::Uuid::new_v4().to_string(),
-                part_number,
+                e_tag,
+                part_number
             }
         );
-
         part_number += 1;
     }
     

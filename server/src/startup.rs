@@ -1,5 +1,6 @@
 use std::net::TcpListener;
 
+use actix_cors::Cors;
 use actix_web::{App, HttpServer, dev::Server, web};
 use aws_sdk_s3::Client as S3Client;
 
@@ -38,12 +39,20 @@ impl Application {
 
 pub async fn run(listener: TcpListener, client: S3Client, bucket: S3Bucket, expires_in: PresignedExpiresIn ) -> Result<Server, std::io::Error> {
 
+    
     let client = web::Data::new(client);
     let bucket = web::Data::new(bucket);
     let expires_in = web::Data::new(expires_in);
     let server = HttpServer::new(
         move || {
+            let cors = Cors::default()
+                .allow_any_origin()
+                .send_wildcard()
+                .allow_any_method()
+                .allow_any_header();
+
             App::new()
+                .wrap(cors)
                 .route("/health_check", web::get().to(health_check))
                 .service(
                     web::scope("/files")

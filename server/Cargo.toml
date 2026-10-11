@@ -14,6 +14,7 @@ thiserror = "1"
 anyhow = "1"
 aws-config = "1.12.0"
 aws-sdk-s3 = "1.152.0"
+actix-cors = "0.7.2"
 
 [dev-dependencies]
 

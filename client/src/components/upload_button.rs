@@ -3,7 +3,7 @@ use leptos::{html, prelude::*, reactive::spawn_local};
 use reactive_stores::StoreFieldIterator;
 use web_sys::{Event, HtmlInputElement, wasm_bindgen::JsCast};
 
-use crate::{context::{UploadPayload, UploadPayloadStoreFields, UploadsStoreFields, use_upload_context}, s3};
+use crate::{context::{UploadPayload, UploadPayloadStoreFields, UploadsStoreFields, use_upload_context}, s3, s3_v2};
 
 // use crate::s3::{self, get_s3_client};
 
@@ -52,12 +52,12 @@ pub fn UploadButton() -> impl IntoView {
 
         
         spawn_local(async move {
-            leptos::logging::log!("reading file bytes");  
+             
             let file_bytes = gloo_file::futures::read_as_bytes(&file).await;
 
             if let Ok(file_bytes) = file_bytes {
                
-                let err = s3::tasks::upload(file_name, &file_bytes[..])
+                let err = s3_v2::tasks::upload(file_name, &file_bytes[..])
                 .await
                 .err();
 

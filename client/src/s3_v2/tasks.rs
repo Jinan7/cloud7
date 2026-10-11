@@ -11,7 +11,7 @@ pub async fn upload(
     )
     .await?;
 
-    
+    leptos::logging::log!("{}", upload_id);
 
     let parts = upload_parts(
         &key,
@@ -19,6 +19,7 @@ pub async fn upload(
         file,    
     ).await?;
 
+    leptos::logging::log!("{:?}", &parts);
     
     complete_multipart_upload(
         &key, 
