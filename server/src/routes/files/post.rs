@@ -1,8 +1,7 @@
-use std::error::Error;
-
-use actix_web::HttpResponse;
+use actix_web::{HttpResponse, web};
 use serde::Deserialize;
 use serde_nested_json;
+use sqlx::{PgPool};
 use crate::utils::e500;
 
 #[derive(Debug, Deserialize)]
@@ -105,9 +104,11 @@ pub struct Object {
     _sequencer: String,
 }
 pub async fn post(
+    pool: web::Data<PgPool>,
     payload: String,
 ) -> Result<HttpResponse, actix_web::Error> {
 
+    let pool: &PgPool = &pool;
     let notification: Notification = serde_json::from_str(&payload)
         .map_err(e500)?;
 
@@ -116,8 +117,22 @@ pub async fn post(
     for record in records {
         let file_name = record.s3.object.key;
         let file_size = record.s3.object.size;
-        let e_tag = record.s3.object.e_tag;
+        let _e_tag = record.s3.object.e_tag;
 
+        sqlx::query!(
+            r#"
+                UPDATE files
+                SET
+                    size = $1,
+                    status = 'confirmed'
+                WHERE name = $2
+            "#,
+            file_size as i32,
+            file_name
+        )
+        .execute(pool)
+        .await
+        .map_err(e500)?;
     }
     Ok(HttpResponse::Ok().finish())   
 }

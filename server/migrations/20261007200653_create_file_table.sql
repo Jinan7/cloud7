@@ -1,6 +1,6 @@
 -- Add migration script here
 
-CREATE TABLE file(
+CREATE TABLE files(
     id uuid NOT NULL,
     PRIMARY KEY (id),
     name TEXT NOT NULL UNIQUE,

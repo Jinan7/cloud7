@@ -1,0 +1,16 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "\n            INSERT INTO files (id, name, mime, size, status)\n            VALUES ($1, $2, $3, 0, 'pending')\n        ",
+  "describe": {
+    "columns": [],
+    "parameters": {
+      "Left": [
+        "Uuid",
+        "Text",
+        "Text"
+      ]
+    },
+    "nullable": []
+  },
+  "hash": "4501564ba0a93ec0112dbc8c6a872fa477a3835897b3b422270f36d8322acb1f"
+}
