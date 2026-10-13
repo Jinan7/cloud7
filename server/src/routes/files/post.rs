@@ -83,6 +83,7 @@ pub struct S3 {
     _s3_schema_version: String,
     #[serde(rename = "configurationId")]
     _configuration_id: String,
+    #[serde(rename = "bucket")]
     _bucket: Bucket,
     object: Object,
 }
@@ -92,6 +93,7 @@ pub struct Bucket {
     _name: String,
     #[serde(rename = "ownerIdentity")]
     _owner_identity: UserIdentity,
+    #[serde(rename = "arn")]
     _arn: String,
 }
 
@@ -101,6 +103,7 @@ pub struct Object {
     size: u64,
     #[serde(rename = "eTag")]
     e_tag: String,
+    #[serde(rename = "sequencer")]
     _sequencer: String,
 }
 pub async fn post(
@@ -117,7 +120,7 @@ pub async fn post(
     for record in records {
         let file_name = record.s3.object.key;
         let file_size = record.s3.object.size;
-        let _e_tag = record.s3.object.e_tag;
+        let e_tag = record.s3.object.e_tag;
 
         sqlx::query!(
             r#"

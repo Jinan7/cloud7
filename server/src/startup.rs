@@ -61,7 +61,7 @@ pub async fn run(listener: TcpListener, pool: PgPool, s3_client: S3Client, bucke
                 .service(
                     web::scope("/files")
                     .route("", web::post().to(post))
-                    .route("/create_multipart/{key}", web::get().to(create_multipart_upload))
+                    .route("/create_multipart/{key}", web::post().to(create_multipart_upload))
                     .route("/upload_part_presigned", web::post().to(upload_part_presigned))
                     .route("/complete_multipart_upload", web::post().to(complete_multipart_upload))
                 )
