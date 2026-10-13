@@ -26,7 +26,7 @@ pub fn UploadButton() -> impl IntoView {
         let file = files.get(0).unwrap();
          
         let file_name = file.name();
-
+        
         let key = uuid::Uuid::new_v4();
 
         let new_upload = UploadPayload {
@@ -48,8 +48,8 @@ pub fn UploadButton() -> impl IntoView {
         if upload.is_none() {return}
         
         let file = gloo_file::File::from(file);
-    
-
+        let mime_type = file.raw_mime_type();
+        leptos::logging::log!("{}", mime_type);
         
         spawn_local(async move {
              
@@ -57,7 +57,7 @@ pub fn UploadButton() -> impl IntoView {
 
             if let Ok(file_bytes) = file_bytes {
                
-                let err = s3_v2::tasks::upload(file_name, &file_bytes[..])
+                let err = s3_v2::tasks::upload(file_name, mime_type, &file_bytes[..])
                 .await
                 .err();
 
