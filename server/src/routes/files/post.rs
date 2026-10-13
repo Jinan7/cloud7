@@ -8,26 +8,26 @@ use crate::utils::e500;
 #[derive(Debug, Deserialize)]
 pub struct Notification {
     #[serde(rename = "Type")]
-    message_type: String,
+    _message_type: String,
     #[serde(rename = "MessageId")]
-    message_id: String,
+    _message_id: String,
     #[serde(rename = "TopicArn")]
-    topic_arn: String,
+    _topic_arn: String,
     #[serde(rename = "Subject")]
-    subject: String,
+    _subject: String,
     #[serde(rename = "Message")]
     #[serde(with = "serde_nested_json")]
     message: Message,
     #[serde(rename = "Timestamp")]
-    timestamp: String,
+    _timestamp: String,
     #[serde(rename = "SignatureVersion")]
-    signature_version: String,
+    _signature_version: String,
     #[serde(rename = "Signature")]
-    signature: String,
+    _signature: String,
     #[serde(rename = "SigningCertURL")]
-    signing_cert_url: String,
+    _signing_cert_url: String,
     #[serde(rename = "UnsubscribeURL")]
-    unsubscribe_url: String,
+    _unsubscribe_url: String,
     
 }
 
@@ -40,60 +40,60 @@ pub struct Message {
 #[derive(Debug, Deserialize)]
 pub struct Record {
     #[serde(rename = "eventVersion")]
-    event_version: String,
+    _event_version: String,
     #[serde(rename = "eventSource")]
-    event_source: String,
+    _event_source: String,
     #[serde(rename = "awsRegion")]
-    aws_region: String,
+    _aws_region: String,
     #[serde(rename = "eventTime")]
-    event_time: String,
+    _event_time: String,
     #[serde(rename = "eventName")]
-    event_name: String,
+    _event_name: String,
     #[serde(rename = "userIdentity")]
-    user_identity: UserIdentity,
+    _user_identity: UserIdentity,
     #[serde(rename = "requestParameters")]
-    request_parameters:  RequestParameters,
+    _request_parameters:  RequestParameters,
      #[serde(rename = "responseElements")]
-    response_elements: ResponseElements,
+    _response_elements: ResponseElements,
     s3: S3,
 }
 
 #[derive(Debug, Deserialize)]
 pub struct UserIdentity {
     #[serde(rename = "principalId")]
-    principal_id: String
+    _principal_id: String
 }
 
 #[derive(Debug, Deserialize)]
 pub struct RequestParameters {
     #[serde(rename = "sourceIPAddress")]
-    source_ip_address: String,
+    _source_ip_address: String,
 }
 
 #[derive(Debug, Deserialize)]
 pub struct ResponseElements {
     #[serde(rename = "x-amz-request-id")]
-    x_amz_request_id: String,
+    _x_amz_request_id: String,
     #[serde(rename = "x-amz-id-2")]
-    x_amz_id_2: String
+    _x_amz_id_2: String
 }
 
 #[derive(Debug, Deserialize)]
 pub struct S3 {
     #[serde(rename = "s3SchemaVersion")]
-    s3_schema_version: String,
+    _s3_schema_version: String,
     #[serde(rename = "configurationId")]
-    configuration_id: String,
-    bucket: Bucket,
+    _configuration_id: String,
+    _bucket: Bucket,
     object: Object,
 }
 
 #[derive(Debug, Deserialize)]
 pub struct Bucket {
-    name: String,
+    _name: String,
     #[serde(rename = "ownerIdentity")]
-    owner_identity: UserIdentity,
-    arn: String,
+    _owner_identity: UserIdentity,
+    _arn: String,
 }
 
 #[derive(Debug, Deserialize)]
@@ -102,7 +102,7 @@ pub struct Object {
     size: u64,
     #[serde(rename = "eTag")]
     e_tag: String,
-    sequencer: String,
+    _sequencer: String,
 }
 pub async fn post(
     payload: String,
@@ -111,19 +111,15 @@ pub async fn post(
     let notification: Notification = serde_json::from_str(&payload)
         .map_err(e500)?;
 
+    let records = notification.message.records;
 
-   Ok(HttpResponse::Ok().finish())   
+    for record in records {
+        let file_name = record.s3.object.key;
+        let file_size = record.s3.object.size;
+        let e_tag = record.s3.object.e_tag;
+
+    }
+    Ok(HttpResponse::Ok().finish())   
 }
 
-fn err_chain(e: &impl Error ) {
-
-    println!("{e:?}");
-
-    let mut error = e.source();
-
-    while error.is_some() {
-        println!("{e:?}");
-        error = e.source()
-    };
-}
 

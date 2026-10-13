@@ -1,7 +1,11 @@
+use sqlx::postgres::{PgConnectOptions, PgSslMode};
+
 #[derive(serde::Deserialize, Debug)]
 pub struct Settings {
     pub application: ApplicationSettings,
+    pub database: DatabaseSettings,
     pub s3: S3Settings,
+    
 }
 
 #[derive(serde::Deserialize, Debug)]
@@ -14,6 +18,42 @@ pub struct ApplicationSettings {
 pub struct S3Settings {
     pub bucket: String,
     pub expires_in: u64,
+}
+
+#[derive(serde::Deserialize, Debug)]
+pub struct DatabaseSettings {
+    pub username: String,
+    pub password: String,
+    pub port: u16,
+    pub host: String,
+    pub database_name: String,
+    pub require_ssl: bool,
+}
+
+impl DatabaseSettings {
+
+    pub fn without_db(&self) -> PgConnectOptions {
+
+        let ssl_mode = if self.require_ssl {
+            PgSslMode::Require
+        } else {
+            PgSslMode::Prefer
+        };
+
+        PgConnectOptions::new()
+            .host(&self.host)
+            .username(&self.username)
+            .password(&self.password)
+            .port(self.port)
+            .ssl_mode(ssl_mode)
+    }
+
+    pub fn with_db(&self) -> PgConnectOptions {
+
+        self.without_db()
+            .database(&self.database_name)
+        
+    }
 }
 enum ENVIRONMENT {
     LOCAL,
