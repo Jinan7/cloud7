@@ -1,4 +1,4 @@
-use crate::s3_v2::actions::{CreateMultipartUploadResponse, complete_multipart_upload, create_multipart_upload_v2, upload_parts};
+use crate::s3_v2::actions::{CreateMultipartUploadResponse, GetObjectPresignedResponse, HeadObjectResponse, complete_multipart_upload, create_multipart_upload_v2, get_object, get_object_presigned, head_object, upload_parts};
 pub async fn upload(
     key: String,
     mime_type: String, 
@@ -30,5 +30,15 @@ pub async fn upload(
     )
     .await?;
 
+    Ok(())
+}
+
+pub async fn download(
+    key: String
+) -> anyhow::Result<()> {
+
+    let GetObjectPresignedResponse { presigned_url }  = get_object_presigned(&key).await?;
+    let HeadObjectResponse { content_length } = head_object(&key).await?;
+    get_object(&key, &presigned_url, content_length).await?;
     Ok(())
 }
