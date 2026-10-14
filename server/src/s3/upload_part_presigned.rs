@@ -22,15 +22,7 @@ pub async fn upload_part_presigned(
         .upload_id(upload_id)
         .part_number(part_number)
         .presigned(expires_in)
-        .await
-        .or_else(
-            |e| {
-                dbg!(&e);
-                return Err(anyhow::anyhow!(e))
-            }
-        )
-        .unwrap();
-
+        .await?;
     Ok(presigned_req.uri().into())
 
 }

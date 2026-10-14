@@ -5,7 +5,7 @@ use actix_web::{App, HttpServer, dev::Server, web};
 use aws_sdk_s3::Client as S3Client;
 use sqlx::{PgPool, postgres::PgPoolOptions};
 
-use crate::{configuration::Settings, routes::{complete_multipart_upload, create_multipart_upload, health_check, post, upload_part_presigned}, s3::{get_config, s3client}};
+use crate::{configuration::Settings, routes::{complete_multipart_upload, create_multipart_upload, get, health_check, post, upload_part_presigned}, s3::{get_config, s3client}};
 
 pub struct Application {
     server: Server,
@@ -64,6 +64,7 @@ pub async fn run(listener: TcpListener, pool: PgPool, s3_client: S3Client, bucke
                     .route("/create_multipart/{key}", web::post().to(create_multipart_upload))
                     .route("/upload_part_presigned", web::post().to(upload_part_presigned))
                     .route("/complete_multipart_upload", web::post().to(complete_multipart_upload))
+                    .route("/{key}", web::get().to(get))
                 )
                 .app_data(pool.clone())
                 .app_data(s3_client.clone())

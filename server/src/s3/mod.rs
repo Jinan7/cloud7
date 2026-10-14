@@ -3,9 +3,13 @@ mod config;
 mod client;
 mod upload_part_presigned;
 mod complete_multipart_upload;
+mod download_file_presigned;
+mod head_object;
 
 pub use create_multipart_upload::*;
 pub use config::*;
 pub use client::*;
 pub use upload_part_presigned::*;
 pub use complete_multipart_upload::*;
+pub use download_file_presigned::*;
+pub use head_object::*;
