@@ -1,5 +1,3 @@
-use leptos::server_fn::request;
-
 #[derive(serde::Deserialize)]
 pub struct HeadObjectResponse {
     pub content_length: i64
