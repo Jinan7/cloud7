@@ -1,30 +1,67 @@
 use actix_web::{HttpResponse, web};
+use serde::{Deserialize, Serialize};
+use sqlx::PgPool;
 
-use crate::{key::Key, s3::download_file_presigned, startup::{PresignedExpiresIn, S3Bucket}, utils::e500};
+use crate::utils::e500;
 
-#[derive(serde::Serialize)]
-pub struct GetObjectResponse {
-    pub presigned_url: String
+const PAGE_LIMIT: i64 = 50;
+#[derive(Deserialize)]
+pub struct GetFilesQuery {
+    pub page: i64,
 }
+
+#[derive(Serialize)]
+pub struct File {
+    id: String,
+    name: String,
+    size: i32,
+}
+
+#[derive(Serialize)]
+pub struct GetFilesResponse {
+    files: Vec<File>
+}
+
 pub async fn get(
-    client: web::Data<aws_sdk_s3::Client>,
-    bucket: web::Data<S3Bucket>,
-    key: web::Path<Key>,
-    expires_in: web::Data<PresignedExpiresIn>
+    pool: web::Data<PgPool>,
+    query: web::Query<GetFilesQuery>
 ) -> Result<HttpResponse, actix_web::Error> {
 
-    let presigned_url = download_file_presigned(
-        &client, 
-        &bucket.0, 
-        &key.key, 
-        expires_in.0
+    let pool: &PgPool = &pool;
+    let offset = (query.0.page - 1) * PAGE_LIMIT;
+
+    let records = sqlx::query!(
+        r#"
+            SELECT id, name, size
+            FROM files 
+            LIMIT $1
+            OFFSET $2
+        "#,
+        PAGE_LIMIT,
+        offset
     )
+    .fetch_all(pool)
     .await
     .map_err(e500)?;
 
-    let response = GetObjectResponse { presigned_url };
+
+    let files = records.iter()
+        .map(|record| {
+            
+            File {
+                id: record.id.to_string(),
+                name: record.name.clone(),
+                size: record.size
+            }
+        })
+        .collect::<Vec<_>>();
+
+    let files = GetFilesResponse { files };
+
+
+
     Ok(
         HttpResponse::Ok()
-        .json(response)
+            .json(&files)
     )
 }

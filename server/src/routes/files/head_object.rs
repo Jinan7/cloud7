@@ -1,7 +1,9 @@
 use actix_web::{HttpResponse, web};
+use serde::Serialize;
 
 use crate::{key::Key, s3, startup::S3Bucket, utils::e500};
 
+#[derive(Serialize)]
 struct HeadObjectResponse {
     content_length: i64
 }
@@ -16,7 +18,8 @@ async fn head_object(
         &bucket.0, 
         &key.key
     )
-    .await?;
+    .await
+    .map_err(e500)?;
 
     let content_length = response
         .content_length()

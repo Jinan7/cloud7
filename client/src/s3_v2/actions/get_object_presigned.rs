@@ -7,7 +7,7 @@ pub async fn get_object_presigned(
 ) -> Result<GetObjectPresignedResponse, anyhow::Error> {
 
     let response = reqwest::Client::new()
-        .get(format!("http://localhost:8000/files/{}", key))
+        .get(format!("http://localhost:8000/files/get_object_presigned/{}", key))
         .send()
         .await?;
 
