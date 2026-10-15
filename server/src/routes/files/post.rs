@@ -90,6 +90,7 @@ pub struct S3 {
 
 #[derive(Debug, Deserialize)]
 pub struct Bucket {
+    #[serde(rename = "name")]
     _name: String,
     #[serde(rename = "ownerIdentity")]
     _owner_identity: UserIdentity,

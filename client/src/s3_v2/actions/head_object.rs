@@ -11,7 +11,9 @@ pub async fn head_object(
         .send()
         .await?;
 
-    let response: HeadObjectResponse = serde_json::from_str(&response.text().await?)?;
+    let text = response.text().await.unwrap();
+    leptos::logging::log!("{}", &text);
+    let response: HeadObjectResponse = serde_json::from_str(&text)?;
     Ok(response)
     
 }

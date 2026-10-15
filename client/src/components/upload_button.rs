@@ -57,7 +57,7 @@ pub fn UploadButton() -> impl IntoView {
 
             if let Ok(file_bytes) = file_bytes {
                
-                let err = s3_v2::tasks::upload(file_name, mime_type, &file_bytes[..])
+                let err = s3_v2::tasks::upload(file_name, mime_type, &file_bytes[..], file.size())
                 .await
                 .err();
 

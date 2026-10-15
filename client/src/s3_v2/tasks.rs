@@ -3,13 +3,15 @@ pub async fn upload(
     key: String,
     mime_type: String, 
     file: &[u8],
+    size: u64,
 ) -> Result<(), anyhow::Error> {
 
    
 
     let CreateMultipartUploadResponse { upload_id, file_id } = create_multipart_upload_v2(
         &key,
-        &mime_type
+        &mime_type,
+        size,
     )
     .await?;
 

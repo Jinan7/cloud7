@@ -1,7 +1,7 @@
 use actix_web::{HttpResponse, web};
 use serde::Serialize;
 use sqlx::{PgPool};
-use crate::{key::Key, s3, startup::S3Bucket, utils::e500};
+use crate::{get_chunks::Chunk, key::Key, s3, startup::S3Bucket, utils::e500};
 
 #[derive(Serialize)]
 struct CreateMultipartUploadResponse {
@@ -12,6 +12,7 @@ struct CreateMultipartUploadResponse {
 #[derive(Debug, serde::Deserialize)]
 pub struct CreateMultipartUploadPayload {
     pub mime: String,
+    pub chunks: Vec<Chunk>
 }
 pub async fn create_multipart_upload(
     pool: web::Data<PgPool>,
@@ -33,14 +34,16 @@ pub async fn create_multipart_upload(
 
     let file_id = uuid::Uuid::new_v4();
 
-    sqlx::query!(
+    println!("{:?}", &payload.0);
+    sqlx::query_unchecked!(
         r#"
-            INSERT INTO files (id, name, mime, size, status)
-            VALUES ($1, $2, $3, 0, 'pending')
+            INSERT INTO files (id, name, mime, size, status, chunks)
+            VALUES ($1, $2, $3, 0, 'pending', $4)
         "#,
         file_id,
         &key.key,
-        &payload.mime
+        &payload.mime,
+        &payload.chunks
     )
     .execute(pool)
     .await

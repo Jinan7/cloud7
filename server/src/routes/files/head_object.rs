@@ -7,7 +7,7 @@ use crate::{key::Key, s3, startup::S3Bucket, utils::e500};
 struct HeadObjectResponse {
     content_length: i64
 }
-async fn head_object(
+pub async fn head_object(
     client: web::Data<aws_sdk_s3::Client>,
     bucket: web::Data<S3Bucket>,
     key: web::Path<Key>
